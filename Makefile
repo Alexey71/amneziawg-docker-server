@@ -61,7 +61,7 @@ add-client:
 	@./scripts/add-client.sh "$(NAME)"
 	@echo ""
 	@echo "Client added! Restarting server..."
-    docker compose up -d --force-recreate --no-deps
+	docker compose up -d --force-recreate --no-deps
 
 remove-client:
 	@if [ -z "$(NAME)" ]; then \
@@ -71,7 +71,7 @@ remove-client:
 	@./scripts/remove-client.sh "$(NAME)"
 	@echo ""
 	@echo "Client removed! Restarting server..."
-    docker compose up -d --force-recreate --no-deps
+	docker compose up -d --force-recreate --no-deps
 
 clean:
 	@echo "WARNING: This will remove ALL configs including server keys!"

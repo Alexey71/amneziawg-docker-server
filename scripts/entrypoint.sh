@@ -21,7 +21,7 @@ generate_keys() {
     if [ ! -f "$KEYS_FILE" ]; then
         echo "Generating server keys..."
         PRIVATE_KEY=$(awg genkey)
-        PUBLIC_KEY=$(echo "$PRIVATE_KEY" | awg pubkey)
+        PUBLIC_KEY=$(printf "%s" "$PRIVATE_KEY" | awg pubkey)
 
         cat > "$KEYS_FILE" <<EOF
 PRIVATE_KEY=${PRIVATE_KEY}

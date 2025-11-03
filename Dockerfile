@@ -20,11 +20,10 @@ RUN apk --no-cache add \
     bash \
     python3 \
     py3-pip \
-    qrencode \
     wget \
     unzip \
     openresolv && \
-    pip3 install --no-cache-dir qrcode && \
+    pip3 install --break-system-packages --no-cache-dir qrcode && \
     cd /usr/bin/ && \
     wget https://github.com/amnezia-vpn/amneziawg-tools/releases/download/v${AWGTOOLS_RELEASE}/alpine-3.19-amneziawg-tools.zip && \
     unzip -j alpine-3.19-amneziawg-tools.zip && \

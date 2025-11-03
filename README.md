@@ -433,9 +433,7 @@ The server includes QR code generation for easy mobile setup:
 make show-qr NAME=mylaptop
 ```
 
-The script automatically uses the best available method:
-1. **qrencode** (best quality, pre-installed in Docker)
-2. **Python qrcode** (fallback, also pre-installed)
+The script uses Python qrcode library (pre-installed in Docker) to generate ASCII QR codes directly in your terminal.
 
 Simply scan the QR code with AmneziaWG mobile app to import the configuration.
 

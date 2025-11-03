@@ -16,9 +16,9 @@ services:
     network_mode: host
     environment:
       # Server network settings (EDIT THESE!)
-      - SERVER_IP=10.201.0.1              # Your server's public IP
+      - SERVER_IP=33.33.33.33             # Your server's public IP
       - LISTEN_PORT=900                   # UDP port for WireGuard
-      - VPN_NETWORK=10.201.0.0/24        # VPN subnet
+      - VPN_NETWORK=10.201.0.0/24         # VPN subnet
       - EXT_INTERFACE=eth0                # External network interface
 
       # AmneziaWG obfuscation parameters

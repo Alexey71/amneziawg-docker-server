@@ -51,27 +51,25 @@ status:
 	@docker exec amneziawg-server awg show 2>/dev/null || echo "Server not running"
 
 clients:
-	@./scripts/list-clients.sh
+	@python3 ./scripts/list-clients.py
 
 add-client:
 	@if [ -z "$(NAME)" ]; then \
 		echo "ERROR: NAME parameter required. Usage: make add-client NAME=myclient"; \
 		exit 1; \
 	fi
-	@./scripts/add-client.sh "$(NAME)"
-	@echo ""
-	@echo "Client added! Restarting server..."
-	docker compose up -d --force-recreate --no-deps
+	@python3 ./scripts/add-client.py "$(NAME)"
+	@echo "Restarting server..."
+	@docker compose up -d --force-recreate --no-deps
 
 remove-client:
 	@if [ -z "$(NAME)" ]; then \
 		echo "ERROR: NAME parameter required. Usage: make remove-client NAME=myclient"; \
 		exit 1; \
 	fi
-	@./scripts/remove-client.sh "$(NAME)"
-	@echo ""
-	@echo "Client removed! Restarting server..."
-	docker compose up -d --force-recreate --no-deps
+	@python3 ./scripts/remove-client.py "$(NAME)"
+	@echo "Restarting server..."
+	@docker compose up -d --force-recreate --no-deps
 
 clean:
 	@echo "WARNING: This will remove ALL configs including server keys!"

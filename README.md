@@ -7,9 +7,9 @@ Docker-based AmneziaWG server with automatic configuration and traffic obfuscati
 - **🔐 Auto-initialization** - Keys and config generated automatically on first start
 - **🎭 Traffic Obfuscation** - DPI bypass with configurable junk packets
 - **🐳 Docker-based** - One-command deployment
-- **👥 Client Management** - Simple scripts for adding/removing clients
+- **👥 Client Management** - Python scripts with key validation and race condition protection
 - **🔄 Idempotent** - Safe restarts without losing configuration
-- **🛡️ Secure** - PresharedKeys for quantum resistance
+- **🛡️ Secure** - PresharedKeys for quantum resistance, proper key handling via stdin
 
 ## Quick Start
 
@@ -59,11 +59,11 @@ Send this file to your client!
 │   └── clients/           # Client configs
 │       └── laptop/
 │           └── laptop.conf
-└── scripts/
-    ├── entrypoint.sh      # Auto-init logic
-    ├── add-client.sh      # Add client
-    ├── list-clients.sh    # List clients
-    └── remove-client.sh   # Remove client
+└── scripts/               # Python scripts for reliability
+    ├── entrypoint.py      # Auto-init logic
+    ├── add-client.py      # Add client
+    ├── list-clients.py    # List clients
+    └── remove-client.py   # Remove client
 ```
 
 ## Configuration
@@ -135,11 +135,12 @@ make restart
 ```
 
 This will:
-1. Generate client keys
+1. Generate client keys (validated to 44 chars, passed via stdin)
 2. Assign IP automatically (10.8.0.2, 10.8.0.3, etc.)
 3. Copy obfuscation params from server
 4. Create `config/clients/mylaptop/mylaptop.conf`
 5. Add peer to server config
+6. Automatically restart server to apply changes
 
 ### Get Client Config
 
@@ -185,15 +186,15 @@ Client: phone
 ### First Start
 
 1. You run `make start`
-2. `entrypoint.sh` checks if `config/server.keys` exists
-3. **If not** → generates keys with `awg genkey`
+2. `entrypoint.py` checks if `config/server.keys` exists
+3. **If not** → generates keys with `awg genkey` (via stdin, validated to 44 chars)
 4. Checks if `config/server.conf` exists
 5. **If not** → creates config from `docker-compose.yml` environment
 6. Starts WireGuard interface
 
 ### Subsequent Starts
 
-1. `entrypoint.sh` finds existing `config/server.keys` → **skips generation**
+1. `entrypoint.py` finds existing `config/server.keys` → **skips generation**
 2. Finds existing `config/server.conf` → **skips creation**
 3. Uses existing config
 4. **Keys and peers preserved!**

@@ -18,6 +18,7 @@ RUN apk --no-cache add \
     iptables \
     ip6tables \
     bash \
+    python3 \
     wget \
     unzip \
     openresolv && \
@@ -35,7 +36,7 @@ RUN mkdir -p /etc/amnezia/amneziawg
 
 WORKDIR /etc/amnezia/amneziawg
 
-COPY scripts/entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+COPY scripts/entrypoint.py /entrypoint.py
+RUN chmod +x /entrypoint.py
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.py"]

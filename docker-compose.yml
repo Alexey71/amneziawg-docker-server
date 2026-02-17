@@ -27,10 +27,17 @@ services:
       - AWG_JMAX=70                       # Max junk packet size
       - AWG_S1=0                          # Handshake init garbage
       - AWG_S2=0                          # Handshake response garbage
+      - AWG_S3=0                          # Handshake response garbage
+      - AWG_S4=0                          # Handshake response garbage
       - AWG_H1=1                          # Header param 1
       - AWG_H2=2                          # Header param 2
       - AWG_H3=3                          # Header param 3
       - AWG_H4=4                          # Header param 4
+      - AWG_I1=1                          # Header param 1
+      - AWG_I2=2                          # Header param 2
+      - AWG_I3=3                          # Header param 3
+      - AWG_I4=4                          # Header param 4
+      - AWG_I5=5                          # Header param 4
 
       # Container settings
       - LOG_LEVEL=info                    # info or debug

@@ -202,7 +202,7 @@ def main():
 
         # Extract obfuscation parameters from server config
         obf_params = {}
-        for param in ['Jc', 'Jmin', 'Jmax', 'S1', 'S2', 'H1', 'H2', 'H3', 'H4']:
+        for param in ['Jc', 'Jmin', 'Jmax', 'S1', 'S2', 'S3', 'S4', 'H1', 'H2', 'H3', 'H4', 'I1', 'I2', 'I3', 'I4', 'I5']:
             match = re.search(rf'^{param}\s*=\s*(\d+)', server_conf, re.MULTILINE)
             obf_params[param] = match.group(1) if match else '0'
 
@@ -218,10 +218,17 @@ Jmin = {obf_params['Jmin']}
 Jmax = {obf_params['Jmax']}
 S1 = {obf_params['S1']}
 S2 = {obf_params['S2']}
+S3 = {obf_params['S3']}
+S4 = {obf_params['S4']}
 H1 = {obf_params['H1']}
 H2 = {obf_params['H2']}
 H3 = {obf_params['H3']}
 H4 = {obf_params['H4']}
+I1 = {obf_params['I1']}
+I2 = {obf_params['I2']}
+I3 = {obf_params['I3']}
+I4 = {obf_params['I4']}
+I5 = {obf_params['I5']}
 
 [Peer]
 PublicKey = {server_public}
